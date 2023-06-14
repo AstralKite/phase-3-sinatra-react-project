@@ -3,7 +3,75 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/" do
-    { message: "Good luck with your project!" }.to_json
+    { message: "Show employees"}.to_json
   end
 
+  #--------------- GET
+  get "/employees" do
+    Employee.all.to_json
+  end
+
+  get "/clients" do
+    Client.all.to_json
+  end
+
+  get "/projects" do
+    Project.all.to_json
+  end
+
+  get "/test" do
+    test
+  end
+
+
+  get "/employees/:id" do
+    Employee.find(params[:id]).to_json
+  end
+
+  get "/employees/find_project/:id" do
+    #{message: "test"}.to_json
+    project = Project.find_by employee_id: params[:id]
+    project.to_json
+  end
+
+  get "/employees/find_client/:id" do
+    #{message: "test"}.to_json
+    project = Project.find_by employee_id: params[:id]
+    client_id = project.client_id
+    client = Client.find(client_id)
+    client.to_json
+  end
+
+  #---------------  POST
+  post "/employees" do
+    employee = Employee.create(firstname: params[:firstname], lastname: params[:lastname], title: params[:title], salary: params[:salary])
+    #binding.pry
+    employee.to_json
+  end
+
+  post "/projects_rand" do
+    client = Client.order('RANDOM()').first
+    employee = Employee.last
+
+    project = Project.create(name: params[:name], employee_id: employee.id, client_id: client.id)
+    #binding.pry
+    employee.to_json
+  end
+
+
+  #---------------  DELETE
+  delete "/employees/:id" do
+    employee = Employee.find(params[:id])
+    employee.destroy
+    employee.to_json
+  end
+
+
+    #---------------  PATCH
+    patch "/employees/:id" do
+      employee = Employee.find(params[:id])
+      employee.update(salary: params[:salary])
+      employee.update(title: params[:title])
+      employee.to_json
+    end
 end
