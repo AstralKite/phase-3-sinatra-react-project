@@ -8,11 +8,11 @@ class ApplicationController < Sinatra::Base
 
   #--------------- GET
   get "/employees" do
-    Employee.all.to_json
+    Employee.all.to_json(include: [:clients, :projects])
   end
 
   get "/clients" do
-    Client.all.to_json
+    Client.all.to_json(include: [:projects])
   end
 
   get "/projects" do
@@ -23,9 +23,12 @@ class ApplicationController < Sinatra::Base
     test
   end
 
-
   get "/employees/:id" do
-    Employee.find(params[:id]).to_json
+    Employee.find(params[:id]).to_json(include: [:clients, :projects])
+  end
+
+  get "/projects/:id" do
+    Project.find(params[:id]).to_json
   end
 
   get "/employees/find_project/:id" do
@@ -49,9 +52,25 @@ class ApplicationController < Sinatra::Base
     employee.to_json
   end
 
+  post "/clients" do
+    client = Client.create(name: params[:name])
+    #binding.pry
+    client.to_json
+  end
+
   post "/projects_rand" do
     client = Client.order('RANDOM()').first
-    employee = Employee.last
+    employee = Employee.order('RANDOM()').first
+
+    project = Project.create(name: params[:name], employee_id: employee.id, client_id: client.id)
+    #binding.pry
+    project.to_json
+  end
+
+
+  post "/add_project_by_emp_id/:id" do
+    client = Client.order('RANDOM()').first
+    employee = Employee.find(params[:id])
 
     project = Project.create(name: params[:name], employee_id: employee.id, client_id: client.id)
     #binding.pry
@@ -59,11 +78,18 @@ class ApplicationController < Sinatra::Base
   end
 
 
+
   #---------------  DELETE
   delete "/employees/:id" do
     employee = Employee.find(params[:id])
     employee.destroy
     employee.to_json
+  end
+
+  delete "/projects/:id" do
+    project = Project.find(params[:id])
+    project.destroy
+    project.to_json
   end
 
 

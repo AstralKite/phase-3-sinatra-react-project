@@ -65,6 +65,7 @@ function App() {
         handleDeleteEmployee={handleDeleteEmployee}
         setdisplayCreateEmployeeForm={setdisplayCreateEmployeeForm}
         setSelectedEmployee={setSelectedEmployee}
+        handleUpdateEmployee={handleUpdateEmployee}
       />
     </div>
   );

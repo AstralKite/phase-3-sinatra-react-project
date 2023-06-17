@@ -1,4 +1,4 @@
-# Phase 3 Project - Employee web API usinf Active Record and Sinatra.
+# Phase 3 Project - Employee web API usinf Active Record and Sinatra
 
 ## How to use this app
 - This app allows you to create a collection of employees and assign them a title, salary, and client they will work for. The Employee is also assgined a project that is connected to a Client. 

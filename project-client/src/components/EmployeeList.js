@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import SelectedEmployeeDisplay from "./SelectedEmployeeDisplay";
 
 function EmployeeList(
-    {employees, handleDeleteEmployee, setdisplayCreateEmployeeForm, setSelectedEmployee}
+    {employees, handleDeleteEmployee, setdisplayCreateEmployeeForm, setSelectedEmployee, handleUpdateEmployee}
 ) {
 
     const employeeInfo = employees;
@@ -11,11 +11,7 @@ function EmployeeList(
 
     //employee to show, state
     const [showEmployee, setShowEmployee] = useState([]);
-    const [showProject, setshowProject] = useState([]);
-    const [showClient, setShowClient] = useState([]);
     
-    const missingProject = "Project: NA"
-    const missingClient = "Client: NA"
 
     function handleEmployeeclick(employee) {
         setSelectedEmployee(employee)
@@ -28,14 +24,10 @@ function EmployeeList(
         //run fetch of project name
         fetch(`http://localhost:9292/employees/find_project/${employee.id}`)
         .then(response => response.json())
-        .then((proj) => setshowProject(proj))
-        .catch(err => setshowProject(missingProject))
 
         //run fetch for client info
         fetch(`http://localhost:9292/employees/find_client/${employee.id}`)
         .then(response => response.json())
-        .then((client) => setShowClient(client))
-        .catch(err => console.log(missingClient))
       }
 
 
@@ -51,7 +43,6 @@ function EmployeeList(
         <div className="employeeListMain">
             <h3>List of Employees</h3>
             <div className="employeeList">
-            
                 <ul >
                     {employeeInfo.map ( (employee) =>
                     <div className="listed-employee">
@@ -63,7 +54,6 @@ function EmployeeList(
                         </li>
                     </div>
                     )}
-                    
                 </ul>
             </div>
 
@@ -71,12 +61,14 @@ function EmployeeList(
                 <SelectedEmployeeDisplay
                     first_name={showEmployee.firstname}
                     last_name={showEmployee.lastname}
-                    project_name={showProject.name}
-                    client_name={showClient.name}
+                    projects={showEmployee.projects}
+                    clients={showEmployee.clients}
                     title={showEmployee.title}
                     salary={showEmployee.salary}
                     employee_id={showEmployee.id}
                     setdisplayCreateEmployeeForm={setdisplayCreateEmployeeForm}
+                    handleUpdateEmployee={handleUpdateEmployee}
+                    selectedEmployee={showEmployee}
                 />
             </div>
         </div>
