@@ -5,7 +5,6 @@ function SelectedEmployeeDisplay( {
     first_name,
     last_name,
     projects,
-    clients,
     salary,
     title,
     employee_id,
@@ -71,7 +70,6 @@ function SelectedEmployeeDisplay( {
     {
         return(
             <div>
-                {/* Header */}
                 <h3>Select Employee</h3>
              </div>
         )

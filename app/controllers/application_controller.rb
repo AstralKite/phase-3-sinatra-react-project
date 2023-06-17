@@ -32,13 +32,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/employees/find_project/:id" do
-    #{message: "test"}.to_json
     project = Project.find_by employee_id: params[:id]
     project.to_json
   end
 
   get "/employees/find_client/:id" do
-    #{message: "test"}.to_json
     project = Project.find_by employee_id: params[:id]
     client_id = project.client_id
     client = Client.find(client_id)
@@ -48,7 +46,6 @@ class ApplicationController < Sinatra::Base
   #---------------  POST
   post "/employees" do
     employee = Employee.create(firstname: params[:firstname], lastname: params[:lastname], title: params[:title], salary: params[:salary])
-    #binding.pry
     employee.to_json
   end
 
@@ -57,13 +54,11 @@ class ApplicationController < Sinatra::Base
     client = Client.order('RANDOM()').first
 
     project = Project.create(name: params[:name], employee_id: employee.id, client_id: client.id)
-    #binding.pry
     employee.to_json
   end
 
   post "/clients" do
     client = Client.create(name: params[:name])
-    #binding.pry
     client.to_json
   end
 
@@ -72,7 +67,6 @@ class ApplicationController < Sinatra::Base
     employee = Employee.order('RANDOM()').first
 
     project = Project.create(name: params[:name], employee_id: employee.id, client_id: client.id)
-    #binding.pry
     project.to_json
   end
 
@@ -82,7 +76,6 @@ class ApplicationController < Sinatra::Base
     employee = Employee.find(params[:id])
 
     project = Project.create(name: params[:name], employee_id: employee.id, client_id: client.id)
-    #binding.pry
     employee.to_json
   end
 

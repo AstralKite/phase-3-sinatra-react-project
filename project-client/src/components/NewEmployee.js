@@ -10,17 +10,12 @@ function NewEmployee( {handleAddEmployee} ){
     const [salary, setSalary] = useState("");
     const [project, setProject] = useState("");
 
-    const [client_name, setClient_name] = useState("");
-    const [employee_id, setEmployee_id] = useState("");
-    const [client_id, setClient_id] = useState("");
-
 
     function handleSubmit(e){
         console.log(first);
         console.log(last);
         e.preventDefault();
         
-            //create new EMplyee
             fetch("http://localhost:9292/add_employee_with_project", {
               method: "POST",
               headers: {
@@ -43,7 +38,6 @@ function NewEmployee( {handleAddEmployee} ){
         }
 
         function AddNewProject(){
-            //create new Project
             fetch("http://localhost:9292/projects_rand", {
               method: "POST",
               headers: {
@@ -51,19 +45,12 @@ function NewEmployee( {handleAddEmployee} ){
               },
               body: JSON.stringify({
                 name: project,
-                employee_id: employee_id,
-                client_id: client_id,
               }),
             })
               .then((r) => r.json())
               .then(() => {
                 resetValues()
             });
-        }
-
-
-        function handleSubmitTEST(){
-
         }
 
 

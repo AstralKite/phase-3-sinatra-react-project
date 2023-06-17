@@ -8,27 +8,22 @@ function EmployeeList(
 
     const employeeInfo = employees;
 
-    //employee to show, state
     const [showEmployee, setShowEmployee] = useState([]);
 
 
     function handleEmployeeclick(employee) {
         setSelectedEmployee(employee)
         console.log(employee)
-        //run fetch using id
         fetch(`http://localhost:9292/employees/${employee.id}`)
         .then(response => response.json())
         .then((emp) => setShowEmployee(emp))
 
-        //run fetch of project name
         fetch(`http://localhost:9292/employees/find_project/${employee.id}`)
         .then(response => response.json())
 
-        //run fetch for client info
         fetch(`http://localhost:9292/employees/find_client/${employee.id}`)
         .then(response => response.json())
       }
-
 
 
       function handleDelete(id){
