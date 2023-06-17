@@ -21,7 +21,7 @@ function NewEmployee( {handleAddEmployee} ){
         e.preventDefault();
         
             //create new EMplyee
-            fetch("http://localhost:9292/employees", {
+            fetch("http://localhost:9292/add_employee_with_project", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -31,6 +31,7 @@ function NewEmployee( {handleAddEmployee} ){
                 lastname: last,
                 title: title,
                 salary: salary,
+                name: project,
               }),
             })
               .then((r) => r.json())

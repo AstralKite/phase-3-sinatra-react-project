@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import './App.css';
 
 
@@ -8,9 +8,8 @@ import EmployeeList from "./components/EmployeeList.js";
 import NewEmployee from "./components/NewEmployee.js";
 import EditEmployee from "./components/EditEmployee.js";
 
+
 function App() {
-
-
   //create array of employees
   const [employees, setEmployees] = useState([]);
   const [displayCreateEmployeeForm, setdisplayCreateEmployeeForm] = useState(true);

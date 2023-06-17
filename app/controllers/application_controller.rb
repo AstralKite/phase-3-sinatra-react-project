@@ -52,6 +52,15 @@ class ApplicationController < Sinatra::Base
     employee.to_json
   end
 
+  post "/add_employee_with_project" do
+    employee = Employee.create(firstname: params[:firstname], lastname: params[:lastname], title: params[:title], salary: params[:salary])
+    client = Client.order('RANDOM()').first
+
+    project = Project.create(name: params[:name], employee_id: employee.id, client_id: client.id)
+    #binding.pry
+    employee.to_json
+  end
+
   post "/clients" do
     client = Client.create(name: params[:name])
     #binding.pry

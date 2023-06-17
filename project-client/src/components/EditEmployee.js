@@ -47,11 +47,9 @@ function EditEmployee( {setdisplayCreateEmployeeForm, handleUpdateEmployee, sele
               .then((data) => {
                 console.log(data)
                 handleUpdateEmployee(selectedEmployee);
-                // AddNewProject()
-                // resetValues()
-            });            
+                setProjectName("")
+            });       
         }
-
 
     return(
         <div className="employee_info_container">
@@ -79,7 +77,7 @@ function EditEmployee( {setdisplayCreateEmployeeForm, handleUpdateEmployee, sele
                             onChange={(e) => setSalary(e.target.value)}
                         />
                     </div>
-                    <button type="submit">UPDATE</button>
+                    <button type="submit">UPDATE and EXIT</button>
                 </form>
             </div>
             
@@ -105,6 +103,4 @@ function EditEmployee( {setdisplayCreateEmployeeForm, handleUpdateEmployee, sele
         </div>
     )
 }
-
-
 export default EditEmployee;

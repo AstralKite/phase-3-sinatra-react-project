@@ -7,11 +7,10 @@ function EmployeeList(
 ) {
 
     const employeeInfo = employees;
-    let showInfo = false;
 
     //employee to show, state
     const [showEmployee, setShowEmployee] = useState([]);
-    
+
 
     function handleEmployeeclick(employee) {
         setSelectedEmployee(employee)
@@ -29,6 +28,7 @@ function EmployeeList(
         fetch(`http://localhost:9292/employees/find_client/${employee.id}`)
         .then(response => response.json())
       }
+
 
 
       function handleDelete(id){

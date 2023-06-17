@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 
 function SelectedEmployeeDisplay( {
@@ -14,7 +14,7 @@ function SelectedEmployeeDisplay( {
     selectedEmployee
 }) {
 
-
+    
     function onHandleEditChoice(id){
         console.log(`Employee id of ${first_name} ${last_name} is: ${id}`)
         setdisplayCreateEmployeeForm(false)
@@ -23,14 +23,12 @@ function SelectedEmployeeDisplay( {
 
     function handleDelete(project){
         console.log(project)
-
-        //frtchDelete
         fetch(`http://localhost:9292/projects/${project.id}`, {
             method: "DELETE",
           });
-
           handleUpdateEmployee(selectedEmployee);
     }
+
 
 
     function Display()
